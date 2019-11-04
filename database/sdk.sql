@@ -1,0 +1,474 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.5
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 16 Okt 2019 pada 03.04
+-- Versi server: 10.1.38-MariaDB
+-- Versi PHP: 5.6.40
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `sdk`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `password` varchar(60) NOT NULL,
+  `firstname` varchar(50) NOT NULL,
+  `lastname` varchar(50) NOT NULL,
+  `photo` varchar(200) NOT NULL,
+  `created_on` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `admin`
+--
+
+INSERT INTO `admin` (`id`, `username`, `password`, `firstname`, `lastname`, `photo`, `created_on`) VALUES
+(1, 'pupersa', '$2y$10$KQXonM6/etO36rLGcu57.uH5RgIkFVsQ1.TqI0wWGa0KGCx8PcStO', 'ris', 'davit', '', '2019-10-02');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `attendance`
+--
+
+CREATE TABLE `attendance` (
+  `id` int(11) NOT NULL,
+  `pin` text NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `time_in` time NOT NULL,
+  `status` int(1) NOT NULL,
+  `time_out` time NOT NULL,
+  `num_hr` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `attendance`
+--
+
+INSERT INTO `attendance` (`id`, `pin`, `employee_id`, `date`, `time_in`, `status`, `time_out`, `num_hr`) VALUES
+(1, '2', 2, '2019-10-15', '02:15:40', 0, '02:15:57', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `cashadvance`
+--
+
+CREATE TABLE `cashadvance` (
+  `id` int(11) NOT NULL,
+  `date_advance` date NOT NULL,
+  `employee_id` varchar(15) NOT NULL,
+  `amount` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `deductions`
+--
+
+CREATE TABLE `deductions` (
+  `id` int(11) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  `amount` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `employees`
+--
+
+CREATE TABLE `employees` (
+  `id` int(11) NOT NULL,
+  `pin` text NOT NULL,
+  `employee_id` varchar(15) NOT NULL,
+  `firstname` varchar(50) NOT NULL,
+  `lastname` varchar(50) NOT NULL,
+  `address` text NOT NULL,
+  `birthdate` date NOT NULL,
+  `contact_info` varchar(100) NOT NULL,
+  `gender` varchar(10) NOT NULL,
+  `position_id` int(11) NOT NULL,
+  `schedule_id` int(11) NOT NULL,
+  `photo` varchar(200) NOT NULL,
+  `created_on` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `employees`
+--
+
+INSERT INTO `employees` (`id`, `pin`, `employee_id`, `firstname`, `lastname`, `address`, `birthdate`, `contact_info`, `gender`, `position_id`, `schedule_id`, `photo`, `created_on`) VALUES
+(1, '', 'UTK258914376', 'ris', 'davit', 'mekar', '2019-10-08', '08788', 'Male', 1, 1, '', '2019-10-11'),
+(2, '1', '1', 'abig', 'ail', 'mekar', '2019-10-02', '64646', 'Male', 2, 2, '', '0000-00-00'),
+(3, '2', '2', 'sfsd', '', '', '0000-00-00', '', '', 0, 0, '', '2019-10-11');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `overtime`
+--
+
+CREATE TABLE `overtime` (
+  `id` int(11) NOT NULL,
+  `employee_id` varchar(15) NOT NULL,
+  `hours` double NOT NULL,
+  `rate` double NOT NULL,
+  `date_overtime` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `position`
+--
+
+CREATE TABLE `position` (
+  `id` int(11) NOT NULL,
+  `description` varchar(150) NOT NULL,
+  `rate` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `position`
+--
+
+INSERT INTO `position` (`id`, `description`, `rate`) VALUES
+(1, 'Staff', 20000),
+(2, 'Dosen', 15000);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `schedules`
+--
+
+CREATE TABLE `schedules` (
+  `id` int(11) NOT NULL,
+  `time_in` time NOT NULL,
+  `time_out` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `schedules`
+--
+
+INSERT INTO `schedules` (`id`, `time_in`, `time_out`) VALUES
+(1, '11:15:00', '23:15:00'),
+(2, '00:15:00', '20:45:00');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_device`
+--
+
+CREATE TABLE `tb_device` (
+  `No` int(11) NOT NULL,
+  `server_IP` text NOT NULL,
+  `server_port` text NOT NULL,
+  `device_sn` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_device`
+--
+
+INSERT INTO `tb_device` (`No`, `server_IP`, `server_port`, `device_sn`) VALUES
+(29, '192.168.1.200', '8080', '66595018220053');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_gelar`
+--
+
+CREATE TABLE `tb_gelar` (
+  `id_gelar` int(5) NOT NULL,
+  `pin_scan` text NOT NULL,
+  `gelar_depan` varchar(20) NOT NULL,
+  `gelar_belakang` varchar(20) NOT NULL,
+  `lokasi` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_penampilan`
+--
+
+CREATE TABLE `tb_penampilan` (
+  `no` int(11) NOT NULL,
+  `pin` text NOT NULL,
+  `nama` text NOT NULL,
+  `status_penampilan` tinyint(1) NOT NULL,
+  `gelar_depan` varchar(50) NOT NULL,
+  `gelar_belakang` varchar(50) NOT NULL,
+  `lokasi` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_scanlog`
+--
+
+CREATE TABLE `tb_scanlog` (
+  `sn` text NOT NULL,
+  `scan_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `pin` text NOT NULL,
+  `verifymode` int(11) NOT NULL,
+  `iomode` int(11) NOT NULL,
+  `workcode` int(11) NOT NULL,
+  `tanggal_absen` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_scanlog`
+--
+
+INSERT INTO `tb_scanlog` (`sn`, `scan_date`, `pin`, `verifymode`, `iomode`, `workcode`, `tanggal_absen`) VALUES
+('fdasfds', '2019-10-14 19:15:40', '1', 1, 1, 1, '2019-10-15'),
+('fdasfsd', '2019-10-14 19:15:57', '1', 1, 2, 1, '2019-10-15');
+
+--
+-- Trigger `tb_scanlog`
+--
+DELIMITER $$
+CREATE TRIGGER `absensi` BEFORE INSERT ON `tb_scanlog` FOR EACH ROW IF(new.iomode)=1 THEN
+
+   INSERT INTO attendance SET pin=new.pin, date=new.scan_date, time_in=new.scan_date;
+   
+ELSE
+
+UPDATE attendance SET time_out=new.scan_date where pin=new.pin AND date=new.tanggal_absen;
+  
+END IF
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `add_to_penampilan` AFTER INSERT ON `tb_scanlog` FOR EACH ROW insert into tb_penampilan (pin, nama, gelar_depan, gelar_belakang, lokasi) 
+select tb_scanlog.pin, tb_user.nama, tb_gelar.gelar_depan, tb_gelar.gelar_belakang, tb_gelar.lokasi from tb_scanlog
+inner join tb_user on tb_scanlog.pin=tb_user.pin
+inner join tb_gelar on tb_scanlog.pin = tb_gelar.pin_scan
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_template`
+--
+
+CREATE TABLE `tb_template` (
+  `pin` text NOT NULL,
+  `finger_idx` int(11) NOT NULL,
+  `alg_ver` int(11) NOT NULL,
+  `template` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_template`
+--
+
+INSERT INTO `tb_template` (`pin`, `finger_idx`, `alg_ver`, `template`) VALUES
+('1', 0, 39, '1E:14:0B:17:13:12:1B:0C:52:7A:51:50:57:56:55:54:4B:4A:49:48:4F:4E:4D:4C:43:42:41:40:47:46:45:44:7B:7A:79:78:7F:7E:7D:7C:73:72:71:70:77:76:75:74:6B:6A:69:68:6F:6E:6D:6C:63:62:61:60:67:66:65:64:1B:1A:19:18:1F:1E:1D:1C:13:12:11:10:17:16:15:14:8B:4A:97:0B:66:37:2D:54:55:51:85:74:78:89:E5:07:32:37:35:3A:34:3B:2D:2A:39:32:31:3F:25:21:3B:20:38:32:22:25:85:E5:61:CA:A3:11:12:75:1B:D7:3D:31:CE:C6:C0:CE:CD:D2:C1:CA:F7:F0:81:12:74:43:F8:E8:90:3E:C3:C4:D6:C3:C6:DD:D9:C1:C1:DB:DB:C4:C9:D4:FB:F1:E0:E2:F6:F4:F0:F9:E2:EA:F2:F6:FA:FF:F4:EE:F2:E0:E0:E4:FE:E6:F8:FD:E7:E5:E3:EA:FB:FD:EA:E9:89:9A:95:8F:9A:98:82:9E:86:86:98:91:99:9A:84:94:99:85:8A:81:83:84:96:90:97:AD:B5:A5:AC:A1:E6:CC:B4:93:A6:45:4D:87:05:89:4C:2E:4E:8E:3B:EE:11:05:F1:23:28:FA:C7:D3:DB:C8:DF:03:F5:0F:0B:D9:D1:10:2D:23:F1:FE:F6:2F:34:FD:FB:18:80:9E:57:56:55:54:4B:4A:49:48:4F:4E:4D:4C:43:42:41:40:47:46:45:44:7B:7A:79:78:7F:7E:7D:7C:73:72:71:70:1F:FE:E6:0D:C1:DF:D2:C6:AD:15:EE:01:38:0C:E1:3E:50:F2:2D:43:DB:D6:D3:B7:A1:66:6B:52:59:AD:76:A7:17:16:15:14:0B:0A:09:08:0F:0E:0D:0C:03:02:01:00:07:06:05:04:3B:3A:39:38:3F:3E:3D:3C:33:32:31:30:B7:86:55:54:EB:CA:C9:E8:CE:2E:8D:B4:AB:C2:81:50:57:FF:AD:D4:B9:39:BA:BA:3D:43:C0:29:A6:1F:34:BD:D7:D6:D5:D4:CB:CA:C9:C8:CF:CE:CD:CC:C3:C2:C1:C0:C7:C6:C5:C4:FB:FA:F9:F8:FF:FE:FD:FC:F3:F2:F1:F0:08:09:0A:0B:14:15:16:17:10:51:46:12:49:1D:1E:1F:18:9E:7F:FE:1B:65:66:67:94:CA:DC:9D:73:6D:6E:6F:D5:97:95:94:75:75:76:87:8F:8E:8C:6C:7C:7D:3E:80:87:96:C5:79:44:45:A2:B8:BF:BE:1D:43:4C:0D:B0:B0:B3:B6:4D:4B:54:81:A9:28:AF:AE:52:53:0C:A7:A1:A0:A7:4C:5A:1B:19:5A:59:58:FF:A0:A2:47:53:52:51:50:BD:A9:EA:54:4B:4A:49:48:B0:B1:4E:4C:43:42:41:B0:B8:F9:44:44:7B:7A:79:87:80:25:7D:7C:73:72:81:8F:C8:77:75:74:6B:6A:96:97:44:6E:6D:6C:63:92:9E:9F:67:66:65:64:1B:E5:E6:1B:1F:1E:1D:9C:E9:ED:EE:B8:17:16:15:BC:F4:F5:96:02:0F:0E:8D:F6:FC:FD:AA:40:02:06:F5:FB:C4:C5:3B:6C:7F:FB:C2:C3:CC:8D:7B:15:63:C9:CA:CB:D4:D5:D6:D7:D0:D1:D2:D3:DC:DD:DE:DF:D8:D9:DA:DB:24:25:26:27:20:21:22:23:2C:2D:2E:2F:28:D6:D5:CC:D3:CA:C9:C8:C2:0A:1A:0E:0B:57:C5:00:02:3A:DC:7F:C1:E8:FD:F8:E6:26:F2:11:FC:17:00:C9:D4:D4:FB:E4:C4:8A:F4:9B:9F:F2:ED:EC:E3:FE:E1:E0:E7:E6:EB:E4:64:7B:97:9F:60:7F:93:9B:6C:71:91:97:17:95:95:94:0B:69:87:88:0F:6D:83:8C:73:61:8F:80:77:F1:85:84:45:4D:82:B8:51:41:86:BC:5D:4D:8A:B0:47:49:B5:B4:5B:B5:A9:A8:50:50:50:50:50:50:50:50:50:50:50:50:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:F0:F0:F0:F0:F0:F0:F0:F0:F0:F0:F0:F0:F0:F0:F0:F0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:50:50:50:50:50:50:50:50:50:50:50:50:50:50:50:50:70:70:70:70:70:70:70:70:70:70:70:70:70:70:70:70:2B:2A:29:28:2F:2E:2D:2C:23:22:21:20:27:26:25:24:DB:DA:D9:D8:DF:DE:DD:DC:D3:D2:D1:D0:D7:D6:D5:D4:CB:CA:C9:C8:CF:CE:CD:CC:C3:C2:C1:C0:C7:C6:C5:C4:FB:FA:F9:F8:FF:FE:FD:FC:F3:F2:F1:F0:F7:F6:F5:F4:EB:EA:E9:E8:EF:EE:ED:EC:E3:E2:E1:E0:E7:E6:E5:E4:9B:9A:99:98:9F:9E:9D:9C:93:92:91:90:97:96:95:94:8B:8A:89:88:8F:8E:8D:8C:83:82:81:80:87:86:85:84:BB:BA:B9:B8:BF:BE:BD:BC:B3:B2:B1:B0:B7:B6:B5:B4:AB:AA:A9:A8:AF:AE:AD:AC:A3:A2:A1:A0:A7:A6:A5:A4:5B:5A:59:58:5F:5E:5D:5C:53:52:51:50:57:56:55:54:4B:4A:49:48:4F:4E:4D:4C:43:42:41:40:47:46:45:44:7B:7A:79:78:7F:7E:7D:7C:73:72:71:70:77:76:75:74:6B:6A:69:68:6F:6E:6D:6C:63:62:61:60:67:66:65:64:1B:1A:19:18:1F:1E:1D:1C:13:12:11:10:17:16:15:14:0B:0A:09:08:0F:0E:0D:0C:03:02:01:00:07:06:05:04:3B:3A:39:38:3F:3E:3D:3C:33:32:31:30:37:36:35:34:2B:2A:29:28:2F:2E:2D:2C:23:22:21:20:27:26:25:24:DB:DA:D9:D8:DF:DE:DD:DC:D3:D2:D1:D0:D7:D6:D5:D4:CB:CA:C9:C8:CF:CE:CD:CC:C3:C2:C1:C0:C7:C6:C5:C4:FB:FA:F9:F8:FF:FE:FD:FC:F3:F2:F1:F0:F7:F6:F5:F4:EB:EA:E9:E8:EF:EE:ED:EC:E3:E2:E1:E0:E7:E6:E5:E4:9B:9A:99:98:9F:9E:9D:9C:93:92:91:90:97:96:95:94:8B:8A:89:88:8F:8E:8D:8C:83:82:81:80:87:86:85:84:BB:BA:B9:B8:BF:BE:BD:BC:B3:B2:B1:B0:B7:B6:B5:B4:AB:AA:A9:A8:AF:AE:AD:AC:A3:A2:A1:A0:A7:A6:A5:A4:5B:5A:59:58:5F:5E:5D:5C:53:52:51:50:57:56:55:54:4B:4A:49:48:4F:4E:4D:4C:43:42:41:40:47:46:45:44:7B:7A:79:78:7F:7E:7D:7C:73:72:71:70:77:76:75:74:6B:6A:69:68:6F:6E:6D:6C:63:62:61:60:67:66:65:64:1B:1A:19:18:1F:1E:1D:1C:13:12:11:10:17:16:15:14:0B:0A:09:08:0F:0E:0D:0C:03:02:01:00:07:06:05:04:3B:3A:39:38:3F:3E:3D:3C:33:32:31:30:37:36:35:34:2B:2A:29:28:2F:2E:2D:2C:23:22:21:20:27:26:25:24:DB:DA:D9:D8:DF:DE:DD:DC:D3:D2:D1:D0:D7:D6:D5:D4:CB:CA:C9:C8:CF:CE:CD:CC:C3:C2:C1:C0:C7:C6:C5:C4:FB:FA:F9:F8:FF:FE:FD:FC:F3:F2:F1:F0:F7:F6:F5:F4:EB:EA:E9:E8:EF:EE:ED:EC:E3:E2:E1:E0:E7:E6:E5:E4:9B:9A:99:98:9F:9E:9D:9C:93:92:91:90:97:96:95:94:8B:8A:89:88:8F:8E:8D:8C:83:82:81:80:87:86:85:84:BB:BA:B9:B8:BF:BE:BD:BC:B3:B2:B1:B0:B7:B6:B5:B4:AB:AA:A9:A8:AF:AE:AD:AC:A3:A2:A1:A0:A7:A6:A5:A4:5B:5A:59:58:5F:5E:5D:5C:53:52:51:50:57:56:55:54:4B:4A:49:48:4F:4E:4D:4C:43:42:41:40:47:46:45:44:7B:7A:79:78:7F:7E:7D:7C:73:72:71:70:77:76:75:74:6B:6A:69:68:6F:6E:6D:6C:63:62:61:60:67:66:65:64:1B:1A:19:18:1F:1E:1D:1C:13:12:11:10:17:16:15:14:0B:0A:09:08:0F:0E:0D:0C:03:02:01:00:07:06:05:04:3B:3A:39:38:3F:3E:3D:3C:33:32:31:30:37:36:35:34:2B:2A:29:28:2F:2E:2D:2C:23:22:21:20:27:26:25:24:DB:DA:D9:D8:DF:DE:DD:DC:D3:D2:D1:D0:D7:D6:D5:D4:'),
+('2', 0, 39, '1E:14:0B:17:13:12:1B:0C:52:7A:51:50:57:56:55:54:4B:4A:49:48:4F:4E:4D:4C:43:42:41:40:47:46:45:44:7B:7A:79:78:7F:7E:7D:7C:73:72:71:70:77:76:75:74:6B:6A:69:68:6F:6E:6D:6C:63:62:61:60:67:66:65:64:1B:1A:19:18:1F:1E:1D:1C:13:12:11:10:17:16:15:14:8B:AC:A7:0A:DF:21:2D:4C:54:5D:65:6C:6F:7B:DF:07:38:3C:34:2F:3A:34:3D:24:2A:2C:3E:3B:33:3E:27:22:29:36:25:35:DE:4B:8D:BC:53:16:5F:20:A5:AF:3F:3D:C1:F6:F8:C1:C1:C6:F9:FF:2D:B3:01:13:1C:E4:1A:59:65:C7:C7:D9:DF:CB:CB:C5:CE:C8:D1:CE:C4:DE:C8:D1:FC:F2:EE:FB:FF:F8:F3:F1:F7:F5:F1:F3:F1:FF:FA:F5:F2:F0:EA:F9:EB:FB:E4:F7:E8:FA:E7:F0:E0:EE:E1:E5:97:8E:80:93:81:97:97:87:85:87:90:8A:95:82:87:94:8C:91:91:9E:9A:91:87:87:95:A5:9D:AD:98:BA:A2:D5:89:DC:83:5A:25:19:86:AD:6A:72:9A:F2:E4:C8:EB:D8:F1:2D:CC:FB:EA:F2:CE:FF:D5:F2:D3:26:D6:22:35:29:2A:2A:32:19:12:DB:D1:3C:65:31:13:31:57:56:55:54:4B:4A:49:48:4F:4E:4D:4C:43:42:41:40:47:46:45:44:7B:7A:79:78:7F:7E:7D:7C:73:72:71:70:E9:DD:CF:13:EC:12:3F:E7:FD:24:2C:29:A4:0D:3F:08:31:3A:FD:5E:C8:35:30:7E:2E:B8:B1:3E:2A:01:0F:12:17:16:15:14:0B:0A:09:08:0F:0E:0D:0C:03:02:01:00:07:06:05:04:3B:3A:39:38:3F:3E:3D:3C:33:32:31:30:E7:B6:DD:B4:E3:F2:A9:E9:EF:A6:AD:24:A2:8A:51:C0:CF:46:E4:44:CA:A2:29:70:D6:7D:1E:56:58:A8:DA:2B:D7:D6:D5:D4:CB:CA:C9:C8:CF:CE:CD:CC:C3:C2:C1:C0:C7:C6:C5:C4:FB:FA:F9:F8:FF:FE:FD:FC:F3:F2:F1:F0:08:C9:A4:F5:14:15:16:17:10:FB:F8:2C:1C:1D:1E:1F:B8:B7:E4:14:64:65:66:27:8A:8B:9D:60:6C:6D:6E:93:C7:97:55:6B:74:75:D6:89:8F:8E:71:73:7C:7D:94:80:87:46:7A:7B:44:E5:B8:B8:BF:42:42:43:4C:B1:B1:B0:77:49:4A:4B:94:AA:A9:A8:57:51:52:53:A0:A2:A1:30:58:59:5A:9B:5B:5A:59:A1:A0:A1:A2:5F:53:52:D1:AF:A8:A9:2A:52:4F:0A:B0:B7:B0:B1:E6:4C:43:E6:BE:BF:B8:B9:43:24:FB:80:86:87:80:75:7D:1C:99:8D:8E:8F:88:76:75:7F:97:95:96:97:64:6E:3D:AD:9C:9D:9E:9F:67:66:30:98:E4:E5:E6:07:1F:4E:F8:E3:EC:ED:EE:17:17:42:EA:EB:F4:F5:B6:08:8F:F0:F2:F3:FC:FD:0E:00:EF:F9:FA:FB:C4:85:39:B8:C0:C1:C2:C3:CC:1D:31:CC:C8:C9:CA:CB:D4:25:E9:D7:D0:D1:D2:D3:DC:C9:DE:DF:D8:D9:DA:DB:24:25:26:27:20:21:22:23:2C:2D:2E:2F:28:AE:45:CC:D3:CA:C9:C9:E0:2F:06:7A:0D:63:31:0A:13:DE:F3:62:D1:E3:E0:FC:F5:16:FC:37:FF:28:1B:B1:FC:E5:F3:E9:DB:A4:F5:9B:EF:EE:ED:EC:63:ED:E1:E0:7B:E9:E5:E4:67:65:EA:98:63:61:EA:92:63:6D:E6:9E:77:95:92:9A:8B:8A:89:88:8F:8E:8D:8C:83:82:81:80:87:86:82:84:44:65:B6:B8:40:61:52:BC:4C:6D:5E:B0:48:6A:52:B4:D7:AA:A9:A8:50:50:50:50:50:50:50:50:50:50:50:50:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:F0:F0:F0:F0:F0:F0:F0:F0:F0:F0:F0:F0:F0:F0:F0:F0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:50:50:50:50:50:50:50:50:50:50:50:50:50:50:50:50:70:70:70:70:70:70:70:70:70:70:70:70:70:70:70:70:2B:2A:29:28:2F:2E:2D:2C:23:22:21:20:27:26:25:24:DB:DA:D9:D8:DF:DE:DD:DC:D3:D2:D1:D0:D7:D6:D5:D4:CB:CA:C9:C8:CF:CE:CD:CC:C3:C2:C1:C0:C7:C6:C5:C4:FB:FA:F9:F8:FF:FE:FD:FC:F3:F2:F1:F0:F7:F6:F5:F4:EB:EA:E9:E8:EF:EE:ED:EC:E3:E2:E1:E0:E7:E6:E5:E4:9B:9A:99:98:9F:9E:9D:9C:93:92:91:90:97:96:95:94:8B:8A:89:88:8F:8E:8D:8C:83:82:81:80:87:86:85:84:BB:BA:B9:B8:BF:BE:BD:BC:B3:B2:B1:B0:B7:B6:B5:B4:AB:AA:A9:A8:AF:AE:AD:AC:A3:A2:A1:A0:A7:A6:A5:A4:5B:5A:59:58:5F:5E:5D:5C:53:52:51:50:57:56:55:54:4B:4A:49:48:4F:4E:4D:4C:43:42:41:40:47:46:45:44:7B:7A:79:78:7F:7E:7D:7C:73:72:71:70:77:76:75:74:6B:6A:69:68:6F:6E:6D:6C:63:62:61:60:67:66:65:64:1B:1A:19:18:1F:1E:1D:1C:13:12:11:10:17:16:15:14:0B:0A:09:08:0F:0E:0D:0C:03:02:01:00:07:06:05:04:3B:3A:39:38:3F:3E:3D:3C:33:32:31:30:37:36:35:34:2B:2A:29:28:2F:2E:2D:2C:23:22:21:20:27:26:25:24:DB:DA:D9:D8:DF:DE:DD:DC:D3:D2:D1:D0:D7:D6:D5:D4:CB:CA:C9:C8:CF:CE:CD:CC:C3:C2:C1:C0:C7:C6:C5:C4:FB:FA:F9:F8:FF:FE:FD:FC:F3:F2:F1:F0:F7:F6:F5:F4:EB:EA:E9:E8:EF:EE:ED:EC:E3:E2:E1:E0:E7:E6:E5:E4:9B:9A:99:98:9F:9E:9D:9C:93:92:91:90:97:96:95:94:8B:8A:89:88:8F:8E:8D:8C:83:82:81:80:87:86:85:84:BB:BA:B9:B8:BF:BE:BD:BC:B3:B2:B1:B0:B7:B6:B5:B4:AB:AA:A9:A8:AF:AE:AD:AC:A3:A2:A1:A0:A7:A6:A5:A4:5B:5A:59:58:5F:5E:5D:5C:53:52:51:50:57:56:55:54:4B:4A:49:48:4F:4E:4D:4C:43:42:41:40:47:46:45:44:7B:7A:79:78:7F:7E:7D:7C:73:72:71:70:77:76:75:74:6B:6A:69:68:6F:6E:6D:6C:63:62:61:60:67:66:65:64:1B:1A:19:18:1F:1E:1D:1C:13:12:11:10:17:16:15:14:0B:0A:09:08:0F:0E:0D:0C:03:02:01:00:07:06:05:04:3B:3A:39:38:3F:3E:3D:3C:33:32:31:30:37:36:35:34:2B:2A:29:28:2F:2E:2D:2C:23:22:21:20:27:26:25:24:DB:DA:D9:D8:DF:DE:DD:DC:D3:D2:D1:D0:D7:D6:D5:D4:CB:CA:C9:C8:CF:CE:CD:CC:C3:C2:C1:C0:C7:C6:C5:C4:FB:FA:F9:F8:FF:FE:FD:FC:F3:F2:F1:F0:F7:F6:F5:F4:EB:EA:E9:E8:EF:EE:ED:EC:E3:E2:E1:E0:E7:E6:E5:E4:9B:9A:99:98:9F:9E:9D:9C:93:92:91:90:97:96:95:94:8B:8A:89:88:8F:8E:8D:8C:83:82:81:80:87:86:85:84:BB:BA:B9:B8:BF:BE:BD:BC:B3:B2:B1:B0:B7:B6:B5:B4:AB:AA:A9:A8:AF:AE:AD:AC:A3:A2:A1:A0:A7:A6:A5:A4:5B:5A:59:58:5F:5E:5D:5C:53:52:51:50:57:56:55:54:4B:4A:49:48:4F:4E:4D:4C:43:42:41:40:47:46:45:44:7B:7A:79:78:7F:7E:7D:7C:73:72:71:70:77:76:75:74:6B:6A:69:68:6F:6E:6D:6C:63:62:61:60:67:66:65:64:1B:1A:19:18:1F:1E:1D:1C:13:12:11:10:17:16:15:14:0B:0A:09:08:0F:0E:0D:0C:03:02:01:00:07:06:05:04:3B:3A:39:38:3F:3E:3D:3C:33:32:31:30:37:36:35:34:2B:2A:29:28:2F:2E:2D:2C:23:22:21:20:27:26:25:24:DB:DA:D9:D8:DF:DE:DD:DC:D3:D2:D1:D0:D7:D6:D5:D4:'),
+('3', 0, 39, '1E:14:0B:17:13:12:1B:0C:52:7A:51:50:57:56:55:54:4B:4A:49:48:4F:4E:4D:4C:43:42:41:40:47:46:45:44:7B:7A:79:78:7F:7E:7D:7C:73:72:71:70:77:76:75:74:6B:6A:69:68:6F:6E:6D:6C:63:62:61:60:67:66:65:64:1B:1A:19:18:1F:1E:1D:1C:13:12:11:10:17:16:15:14:8B:3B:0E:0A:0A:2F:1B:34:4E:55:75:74:84:82:D5:07:3A:2A:35:3C:38:3C:37:30:34:3B:32:36:3A:3E:3C:31:20:3B:29:2C:14:62:FB:AC:F6:AD:74:D0:EA:AC:3D:32:C2:C9:C1:FF:C9:CD:EE:F7:AC:8B:6E:1F:60:1D:8B:05:56:A0:CD:CD:DF:DC:C2:C6:CD:C8:CF:CF:D4:D4:C7:C5:E9:FD:F3:EC:FE:FC:F8:F9:F3:FB:F0:F2:F0:F5:F0:FC:E6:EE:E9:E9:ED:EA:EC:EF:EB:E5:F3:E0:E1:EA:F7:E5:99:94:96:95:95:99:8F:88:92:90:94:99:9F:92:94:99:89:82:89:8F:8E:8C:80:8F:94:9F:94:B3:A0:A6:90:91:9C:87:AA:46:F3:6A:AF:03:56:88:9D:E8:D1:D8:D1:E2:C9:C5:CF:24:C6:29:2C:DE:34:35:EC:E6:D4:39:27:EB:FE:3C:59:58:5F:5E:5D:5C:53:52:51:50:57:56:55:54:4B:4A:49:48:4F:4E:4D:4C:43:42:41:40:47:46:45:44:7B:7A:79:78:7F:7E:7D:7C:73:72:71:70:BB:F8:F9:FA:C0:DB:33:C2:D2:AF:02:33:1D:F5:06:0D:0B:E9:1A:30:72:2B:19:18:1F:1E:1D:1C:13:12:11:10:17:16:15:14:0B:0A:09:08:0F:0E:0D:0C:03:02:01:00:07:06:05:04:3B:3A:39:38:3F:3E:3D:3C:33:32:31:30:F6:F6:F5:F4:EB:FA:B1:70:E7:4E:AD:2D:43:72:89:08:BD:F4:88:00:BF:56:D9:D8:DF:DE:DD:DC:D3:D2:D1:D0:D7:D6:D5:D4:CB:CA:C9:C8:CF:CE:CD:CC:C3:C2:C1:C0:C7:C6:C5:C4:FB:FA:F9:F8:FF:FE:FD:FC:F3:F2:F1:F0:08:09:0A:0B:14:15:16:17:10:11:12:13:1C:1D:1E:1F:18:19:1A:1B:64:65:66:67:20:34:77:63:6C:6D:6E:6F:3C:80:6D:6B:74:75:76:8B:A5:0E:73:73:7C:7D:BE:20:D5:6C:7A:7B:44:45:E9:AC:16:44:42:43:4C:2D:BB:20:2D:49:4A:4B:54:00:A9:C0:55:51:52:53:0C:A8:A1:22:59:59:5A:5B:5B:5A:59:B2:A0:A1:A2:53:43:57:F1:AE:A8:A9:AA:54:1B:60:E3:B7:B0:B1:62:4C:E3:40:B8:BF:B8:B9:45:44:11:FF:86:87:80:41:7D:EC:27:86:8E:8F:88:75:75:34:EE:95:96:97:50:6E:6D:6C:9B:9D:9E:9F:64:66:65:E5:E4:E5:E6:27:1F:1E:3D:E4:EC:ED:EE:1F:17:16:CF:EB:F4:F5:F6:08:0F:AE:F3:F3:FC:FD:3E:00:07:F9:FA:FB:C4:C5:36:38:CF:C1:C2:C3:CC:CD:31:CE:C8:C9:CA:CB:D4:D5:D6:D7:D0:D1:D2:D3:DC:DD:DE:DF:D8:D9:DA:DB:24:25:26:27:20:21:22:23:2C:2D:2E:2F:28:D6:D5:CC:D3:CA:C9:C9:F2:36:19:7E:07:6D:1E:07:3F:D8:EA:50:C1:E5:E8:F4:08:1A:E2:24:0B:3E:15:CB:F1:FE:0E:C6:D0:DD:FE:8D:EF:2E:EC:EC:FF:E2:E1:E0:FB:E6:E5:E4:87:EA:99:98:7F:E6:9D:9C:73:EE:91:90:67:AA:95:94:FB:96:89:88:F3:8E:8D:8C:9F:82:81:80:98:86:85:84:44:A5:B7:B8:40:A1:B3:BC:4C:AD:BF:B0:48:69:B4:B4:2B:75:A8:A8:50:50:50:50:50:50:50:50:50:50:50:50:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:F0:F0:F0:F0:F0:F0:F0:F0:F0:F0:F0:F0:F0:F0:F0:F0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:D0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:B0:50:50:50:50:50:50:50:50:50:50:50:50:50:50:50:50:70:70:70:70:70:70:70:70:70:70:70:70:70:70:70:70:2B:2A:29:28:2F:2E:2D:2C:23:22:21:20:27:26:25:24:DB:DA:D9:D8:DF:DE:DD:DC:D3:D2:D1:D0:D7:D6:D5:D4:CB:CA:C9:C8:CF:CE:CD:CC:C3:C2:C1:C0:C7:C6:C5:C4:FB:FA:F9:F8:FF:FE:FD:FC:F3:F2:F1:F0:F7:F6:F5:F4:EB:EA:E9:E8:EF:EE:ED:EC:E3:E2:E1:E0:E7:E6:E5:E4:9B:9A:99:98:9F:9E:9D:9C:93:92:91:90:97:96:95:94:8B:8A:89:88:8F:8E:8D:8C:83:82:81:80:87:86:85:84:BB:BA:B9:B8:BF:BE:BD:BC:B3:B2:B1:B0:B7:B6:B5:B4:AB:AA:A9:A8:AF:AE:AD:AC:A3:A2:A1:A0:A7:A6:A5:A4:5B:5A:59:58:5F:5E:5D:5C:53:52:51:50:57:56:55:54:4B:4A:49:48:4F:4E:4D:4C:43:42:41:40:47:46:45:44:7B:7A:79:78:7F:7E:7D:7C:73:72:71:70:77:76:75:74:6B:6A:69:68:6F:6E:6D:6C:63:62:61:60:67:66:65:64:1B:1A:19:18:1F:1E:1D:1C:13:12:11:10:17:16:15:14:0B:0A:09:08:0F:0E:0D:0C:03:02:01:00:07:06:05:04:3B:3A:39:38:3F:3E:3D:3C:33:32:31:30:37:36:35:34:2B:2A:29:28:2F:2E:2D:2C:23:22:21:20:27:26:25:24:DB:DA:D9:D8:DF:DE:DD:DC:D3:D2:D1:D0:D7:D6:D5:D4:CB:CA:C9:C8:CF:CE:CD:CC:C3:C2:C1:C0:C7:C6:C5:C4:FB:FA:F9:F8:FF:FE:FD:FC:F3:F2:F1:F0:F7:F6:F5:F4:EB:EA:E9:E8:EF:EE:ED:EC:E3:E2:E1:E0:E7:E6:E5:E4:9B:9A:99:98:9F:9E:9D:9C:93:92:91:90:97:96:95:94:8B:8A:89:88:8F:8E:8D:8C:83:82:81:80:87:86:85:84:BB:BA:B9:B8:BF:BE:BD:BC:B3:B2:B1:B0:B7:B6:B5:B4:AB:AA:A9:A8:AF:AE:AD:AC:A3:A2:A1:A0:A7:A6:A5:A4:5B:5A:59:58:5F:5E:5D:5C:53:52:51:50:57:56:55:54:4B:4A:49:48:4F:4E:4D:4C:43:42:41:40:47:46:45:44:7B:7A:79:78:7F:7E:7D:7C:73:72:71:70:77:76:75:74:6B:6A:69:68:6F:6E:6D:6C:63:62:61:60:67:66:65:64:1B:1A:19:18:1F:1E:1D:1C:13:12:11:10:17:16:15:14:0B:0A:09:08:0F:0E:0D:0C:03:02:01:00:07:06:05:04:3B:3A:39:38:3F:3E:3D:3C:33:32:31:30:37:36:35:34:2B:2A:29:28:2F:2E:2D:2C:23:22:21:20:27:26:25:24:DB:DA:D9:D8:DF:DE:DD:DC:D3:D2:D1:D0:D7:D6:D5:D4:CB:CA:C9:C8:CF:CE:CD:CC:C3:C2:C1:C0:C7:C6:C5:C4:FB:FA:F9:F8:FF:FE:FD:FC:F3:F2:F1:F0:F7:F6:F5:F4:EB:EA:E9:E8:EF:EE:ED:EC:E3:E2:E1:E0:E7:E6:E5:E4:9B:9A:99:98:9F:9E:9D:9C:93:92:91:90:97:96:95:94:8B:8A:89:88:8F:8E:8D:8C:83:82:81:80:87:86:85:84:BB:BA:B9:B8:BF:BE:BD:BC:B3:B2:B1:B0:B7:B6:B5:B4:AB:AA:A9:A8:AF:AE:AD:AC:A3:A2:A1:A0:A7:A6:A5:A4:5B:5A:59:58:5F:5E:5D:5C:53:52:51:50:57:56:55:54:4B:4A:49:48:4F:4E:4D:4C:43:42:41:40:47:46:45:44:7B:7A:79:78:7F:7E:7D:7C:73:72:71:70:77:76:75:74:6B:6A:69:68:6F:6E:6D:6C:63:62:61:60:67:66:65:64:1B:1A:19:18:1F:1E:1D:1C:13:12:11:10:17:16:15:14:0B:0A:09:08:0F:0E:0D:0C:03:02:01:00:07:06:05:04:3B:3A:39:38:3F:3E:3D:3C:33:32:31:30:37:36:35:34:2B:2A:29:28:2F:2E:2D:2C:23:22:21:20:27:26:25:24:DB:DA:D9:D8:DF:DE:DD:DC:D3:D2:D1:D0:D7:D6:D5:D4:');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_user`
+--
+
+CREATE TABLE `tb_user` (
+  `pin` text NOT NULL,
+  `nama` text NOT NULL,
+  `pwd` text NOT NULL,
+  `rfid` text NOT NULL,
+  `privilege` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tb_user`
+--
+
+INSERT INTO `tb_user` (`pin`, `nama`, `pwd`, `rfid`, `privilege`) VALUES
+('1', 'abig', '', '', 1),
+('2', 'sfsd', '', '', 2);
+
+--
+-- Trigger `tb_user`
+--
+DELIMITER $$
+CREATE TRIGGER `add_employee` BEFORE INSERT ON `tb_user` FOR EACH ROW INSERT INTO employees SET pin=new.pin, firstname=new.nama, created_on=CURRENT_DATE
+$$
+DELIMITER ;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indeks untuk tabel `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `attendance`
+--
+ALTER TABLE `attendance`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `cashadvance`
+--
+ALTER TABLE `cashadvance`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `deductions`
+--
+ALTER TABLE `deductions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `employees`
+--
+ALTER TABLE `employees`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `overtime`
+--
+ALTER TABLE `overtime`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `position`
+--
+ALTER TABLE `position`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `schedules`
+--
+ALTER TABLE `schedules`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `tb_device`
+--
+ALTER TABLE `tb_device`
+  ADD PRIMARY KEY (`No`);
+
+--
+-- Indeks untuk tabel `tb_gelar`
+--
+ALTER TABLE `tb_gelar`
+  ADD PRIMARY KEY (`id_gelar`);
+
+--
+-- Indeks untuk tabel `tb_penampilan`
+--
+ALTER TABLE `tb_penampilan`
+  ADD PRIMARY KEY (`no`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
+--
+
+--
+-- AUTO_INCREMENT untuk tabel `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `attendance`
+--
+ALTER TABLE `attendance`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `cashadvance`
+--
+ALTER TABLE `cashadvance`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `deductions`
+--
+ALTER TABLE `deductions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `employees`
+--
+ALTER TABLE `employees`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT untuk tabel `overtime`
+--
+ALTER TABLE `overtime`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `position`
+--
+ALTER TABLE `position`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `schedules`
+--
+ALTER TABLE `schedules`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `tb_device`
+--
+ALTER TABLE `tb_device`
+  MODIFY `No` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT untuk tabel `tb_gelar`
+--
+ALTER TABLE `tb_gelar`
+  MODIFY `id_gelar` int(5) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `tb_penampilan`
+--
+ALTER TABLE `tb_penampilan`
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
